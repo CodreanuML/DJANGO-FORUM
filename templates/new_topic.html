@@ -1,0 +1,48 @@
+{% extends 'template.html'  %}
+
+
+{% block content %}
+
+<div class="main_page">
+
+
+<div class="form_container">
+
+  <div class="form_title">
+    Adaugare topic nou 
+  </div>
+
+  <form method="post">
+    {% csrf_token %}
+
+   
+
+
+    {% for form_field in form %}
+
+    <div class="row">
+    	<div class="column">
+     {{ form_field.label}}
+        </div>
+        <div class="column">
+     {{ form_field}}
+      	</div>
+    </div>
+    <hr/>
+    {% endfor %}
+
+
+ 
+    <div class="row">
+    <button type="submit" class="btn">Adauga</button>
+	</div>
+  </form>
+</div>
+
+
+</div>
+
+
+
+
+{% endblock %}

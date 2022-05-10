@@ -1,0 +1,58 @@
+{% load static %} 
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="{% static 'css/style.css' %}" rel="stylesheet" type="text/css"> 
+    <title></title>
+    
+
+
+
+
+</head>
+<body>
+
+
+<div class="navbar">
+    <div class="left">
+    <div class="button_1"><a href="{% url 'TWEET:home' %}" color="white" >ACASA </a> </div>
+
+    </div>
+    <div class="right">
+    {% if user.is_authenticated %}
+        <p class="nume">
+        Utilizator: {{user.username}}
+        </p>
+
+        <div class="button_2"><a href="{% url 'ACCOUNTS:logout' %}" color="white" >DELOGARE</a> </div>
+
+
+    {% else %}
+  
+        <div class="button_2"><a href="{% url 'ACCOUNTS:login' %}" color="white" >LOGARE</a> </div>
+        <div class="button_3"><a href="{% url 'ACCOUNTS:signup' %}" color="white" >INREGISTRARE </a> </div>
+    
+    {% endif %}
+
+
+
+
+    </div>
+</div>
+
+
+
+
+       {% block content %}
+
+
+       
+       {% endblock %}
+
+
+
+</body>
+</html>

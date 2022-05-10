@@ -1,0 +1,120 @@
+{% extends 'template.html' %}
+
+
+
+
+{% block content %}
+
+
+       
+      
+
+
+
+<div class="main_page" >
+
+<table>
+	
+	<tr>
+		<th>No.
+		</th>
+		<th>
+			Denumire
+		</th>
+		<th>
+			Descriere
+		</th>
+		<th>
+			Postari
+		</th>
+		<th>
+			Data initiere
+		</th>
+		<th>
+			Initiator
+		</th>
+	</tr>
+
+{% for topic in page_obj %}
+	<tr>
+
+		<td>
+
+			{{topic.pk}}
+			
+		</td>
+
+		<td>
+
+			{{topic.nume}}
+			
+		</td>
+		<td>
+			{{topic.descriere}}
+		</td>
+		<td>
+			{{topic.posts.all.count}}
+		</td>
+
+		<td>
+			{{topic.data_initiere}}
+		</td>
+				<td>
+			{{topic.utilizator}}
+		</td>
+
+		<td>
+			 <form action="{% url 'TWEET:topic' topic.pk  %}" method="get">
+                <button type="submit">Acceseaza</button>
+             </form>
+
+		</td>
+	</tr>
+
+{% endfor %}
+
+
+</table>
+
+
+
+
+
+
+
+
+</div>
+
+
+
+			<div class="btn_add">
+
+			 <form action="{% url 'TWEET:add_topic' board.pk %}" method="get">
+                <button type="submit">Topic Nou</button>
+             </form>
+
+         </div>
+
+
+
+	<div class="pagination">
+    	<span class="step-links">
+        {% if page_obj.has_previous %}
+            <a href="?page=1">&laquo; first</a>
+            <a href="?page={{ page_obj.previous_page_number }}">previous</a>
+        {% endif %}
+
+        <span class="current">
+            Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}.
+        </span>
+
+        {% if page_obj.has_next %}
+            <a href="?page={{ page_obj.next_page_number }}">next</a>
+            <a href="?page={{ page_obj.paginator.num_pages }}">last &raquo;</a>
+        {% endif %}
+    </span>
+</div>
+
+</div>
+
+ {% endblock %}

@@ -1,0 +1,66 @@
+{% extends 'template.html' %}
+
+{% block content %}
+
+
+<div class="main_page_posts" >
+	<div class="nume">
+
+		{{topic}}
+	</div>	
+	{% for post in page_obj %}
+	<div class="container-post">
+		Nume:{{post.nume}}<hr/>
+		Mesajul:{{post.descriere}}<hr/>
+		Topic:{{post.topic}} <hr/>
+		Postat De :{{post.utilizator}} <hr/>
+		Data : {{post.data_initiere}} <hr/>
+ 		
+		<div class="btn_add">
+
+			 <form action="{% url 'TWEET:post_edit' post.pk %}" method="get">
+                <button type="submit">Editeaza</button>
+             </form>
+
+         </div>
+
+	</div>
+	{% endfor %}
+
+
+
+
+				<div class="btn_add">
+
+			 <form action="{% url 'TWEET:add_post' topic.pk %}" method="get">
+                <button type="submit">Post Nou</button>
+             </form>
+
+         </div>
+
+
+
+	<div class="pagination">
+    	<span class="step-links">
+        {% if page_obj.has_previous %}
+            <a href="?page=1">&laquo; first</a>
+            <a href="?page={{ page_obj.previous_page_number }}">previous</a>
+        {% endif %}
+
+        <span class="current">
+            Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}.
+        </span>
+
+        {% if page_obj.has_next %}
+            <a href="?page={{ page_obj.next_page_number }}">next</a>
+            <a href="?page={{ page_obj.paginator.num_pages }}">last &raquo;</a>
+        {% endif %}
+    </span>
+</div>
+
+</div>
+
+</div>
+
+
+{% endblock %}
